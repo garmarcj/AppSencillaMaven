@@ -1,0 +1,26 @@
+name: Java CI del IES El Caminàs con Maven
+
+on:
+  push:
+    branches: [ "master" ]
+
+  pull_request:    
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Paso 1: Descargar tu código
+      - uses: actions/checkout@v6
+
+    # Paso 2: Descargar Java 
+      - uses: actions/setup-java@v5
+        with:
+            distribution: 'temurin' # See 'Supported distributions' for available options
+            java-version: '21'      
+            
+    # Paso 3: Ejecutar Maven (compilar y testear)
+      - name: Build con Maven
+        run: mvn -B package --file pom.xml
